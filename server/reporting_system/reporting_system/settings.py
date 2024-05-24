@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import django_heroku
 
 
 load_dotenv()
@@ -70,6 +71,8 @@ TEMPLATES = [
         },
     },
 ]
+
+django_heroku.settings(locals(), staticfiles=False)
 
 WSGI_APPLICATION = 'reporting_system.wsgi.application'
 

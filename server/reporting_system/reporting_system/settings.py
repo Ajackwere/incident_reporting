@@ -142,3 +142,5 @@ SWAGGER_SETTINGS = {
     },
     'USE_SESSION_AUTH': False,
 }
+
+from .gunicorn_config import *

@@ -2,7 +2,6 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
-import django_heroku
 
 
 load_dotenv()
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_beat',
     'drf_yasg',
+    'whitenoise.runserver_nostatic', 
 ]
 
 MIDDLEWARE = [
@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'reporting_system.urls'
@@ -72,7 +73,6 @@ TEMPLATES = [
     },
 ]
 
-django_heroku.settings(locals(), staticfiles=True)
 
 WSGI_APPLICATION = 'reporting_system.wsgi.application'
 
@@ -116,6 +116,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

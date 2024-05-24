@@ -24,7 +24,7 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('report/', IncidentReportView.as_view(), name='report'),
     path('incidents/', IncidentListView.as_view(), name='incident-list'),
-    path('incidents/<int:pk>/', views.IncidentDetailView.as_view(), name='incident-detail'),
+    path('incidents/<int:pk>/', IncidentDetailView.as_view(), name='incident-detail'),
     path('daily-analysis/', DailyAnalysisView.as_view(), name='daily_analysis'),
     path('monthly-analysis/', MonthlyAnalysisView.as_view(), name='monthly_analysis'),
     path('admin/', admin.site.urls),

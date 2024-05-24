@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from reports.views import UserRegisterView, IncidentReportView, LoginView, DailyAnalysisView, MonthlyAnalysisView
+from reports.views import UserRegisterView, IncidentReportView, LoginView, DailyAnalysisView, MonthlyAnalysisView, IncidentListView, IncidentDetailView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -23,6 +23,8 @@ urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login'),
     path('report/', IncidentReportView.as_view(), name='report'),
+    path('incidents/', IncidentListView.as_view(), name='incident-list'),
+    path('incidents/<int:pk>/', views.IncidentDetailView.as_view(), name='incident-detail'),
     path('daily-analysis/', DailyAnalysisView.as_view(), name='daily_analysis'),
     path('monthly-analysis/', MonthlyAnalysisView.as_view(), name='monthly_analysis'),
     path('admin/', admin.site.urls),

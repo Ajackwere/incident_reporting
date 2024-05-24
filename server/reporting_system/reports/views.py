@@ -27,7 +27,22 @@ class IncidentReportView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+class IncidentListView(generics.ListAPIView):
+    """
+    Retrieve all incident reports.
+    """
+    queryset = Incident.objects.all()
+    serializer_class = IncidentSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
+class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, update or delete an incident report.
+    """
+    queryset = Incident.objects.all()
+    serializer_class = IncidentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+    
 class LoginView(APIView):
 
     """

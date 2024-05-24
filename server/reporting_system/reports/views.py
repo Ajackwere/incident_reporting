@@ -9,10 +9,18 @@ from rest_framework.views import APIView
 User = get_user_model()
 
 class UserRegisterView(generics.CreateAPIView):
+    """
+    User registration endpoint.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class IncidentReportView(generics.CreateAPIView):
+    
+    """
+    Incident report endpoint.
+    """
+    
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -21,6 +29,11 @@ class IncidentReportView(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
 class LoginView(APIView):
+
+    """
+    User login endpoint.
+    """
+    
     def post(self, request, *args, **kwargs):
         username = request.data.get("username")
         password = request.data.get("password")
@@ -31,11 +44,19 @@ class LoginView(APIView):
         return Response({"error": "Invalid Credentials"}, status=400)
 
 class DailyAnalysisView(generics.ListAPIView):
+    """
+    List daily analysis data (Admin only).
+    """
     queryset = DailyAnalysis.objects.all()
     serializer_class = DailyAnalysisSerializer
     permission_classes = [permissions.IsAdminUser]
 
 class MonthlyAnalysisView(generics.ListAPIView):
+
+    """
+    List monthly analysis data (Admin only).
+    """
+    
     queryset = MonthlyAnalysis.objects.all()
     serializer_class = MonthlyAnalysisSerializer
     permission_classes = [permissions.IsAdminUser]

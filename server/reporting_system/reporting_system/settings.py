@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals(), staticfiles=True)
 
 WSGI_APPLICATION = 'reporting_system.wsgi.application'
 

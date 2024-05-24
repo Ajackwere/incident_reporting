@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to the Reporting System API</title>
+</head>
+<body>
+    <h1>Welcome to the Reporting System API</h1>
+    <p>Here are the available API endpoints:</p>
+    <ul>
+        {% for url_name, url in api_urls.items %}
+        <li><a href="{{ url }}">{{ url_name }}</a></li>
+        {% endfor %}
+    </ul>
+    <p>Check /swagger or /redoc for the documentation</p>
+</body>
+</head>

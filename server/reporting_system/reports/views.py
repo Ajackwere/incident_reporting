@@ -5,6 +5,9 @@ from .serializers import UserSerializer, IncidentSerializer, DailyAnalysisSerial
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.shortcuts import render
+
+
 
 User = get_user_model()
 
@@ -14,6 +17,20 @@ class UserRegisterView(generics.CreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+def home(request):
+    """
+    Home page view for the API.
+    """
+    api_urls = {
+        'register': '/register/',
+        'login': '/login/',
+        'report': '/report/',
+        'incidents': '/incidents/',
+        'daily-analysis': '/daily-analysis/',  # (Admin only)
+        'monthly-analysis': '/monthly-analysis/',  # (Admin only)
+    }
+    return render(request, 'home.html', context={'api_urls': api_urls})
 
 class IncidentReportView(generics.CreateAPIView):
     

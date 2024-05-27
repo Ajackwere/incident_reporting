@@ -40,7 +40,7 @@ class IncidentReportView(generics.CreateAPIView):
     
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -50,7 +50,7 @@ class IncidentListView(generics.ListAPIView):
     """
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
 
 class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -58,7 +58,7 @@ class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
     
 class LoginView(APIView):
 
@@ -81,7 +81,7 @@ class DailyAnalysisView(generics.ListAPIView):
     """
     queryset = DailyAnalysis.objects.all()
     serializer_class = DailyAnalysisSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = []
 
 class MonthlyAnalysisView(generics.ListAPIView):
 
@@ -91,4 +91,4 @@ class MonthlyAnalysisView(generics.ListAPIView):
     
     queryset = MonthlyAnalysis.objects.all()
     serializer_class = MonthlyAnalysisSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = []

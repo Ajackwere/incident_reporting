@@ -1,0 +1,130 @@
+.account-cnt {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.account-body {
+  width: 100vw;
+  max-width: 1300px;
+  height: 85vh;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  position: relative;
+  overflow: auto;
+}
+.ab-head {
+  margin: 0%;
+  padding: 0%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.7rem;
+  list-style: none;
+  position: sticky;
+  top: 0%;
+  background-color: white;
+  z-index: 10;
+}
+.ab-head li {
+  display: flex;
+  gap: 0.5rem;
+}
+.ab-head h1 {
+  margin: 0%;
+  font-size: 1.3rem;
+}
+.ac-user-info {
+  display: flex;
+  gap: 0.5rem;
+}
+.bc-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: center;
+}
+.bc-head h2 {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+.bc-head button {
+  height: fit-content;
+  background-color: purple;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.report-charts {
+  padding: 0 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.chart-card {
+  width: 100vw;
+  max-width: 400px;
+  height: 250px;
+}
+.incidents {
+  padding: 0.5rem;
+  height: 300px;
+}
+.new-i-cnt {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.198);
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  display: flex;
+  justify-content: center;
+  z-index: 20;
+}
+.new-i {
+  background-color: white;
+  padding: 1rem;
+  height: fit-content;
+  width: 90vw;
+  max-width: 400px;
+  margin-top: 20vh;
+}
+.new-i-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.new-i-head h1 {
+  font-size: 1.3rem;
+  margin: 0%;
+}
+.new-i-head span {
+  cursor: pointer;
+}
+.i-type-info {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.new-i textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100px;
+}
+@media (max-width: 1300px) {
+  .account-body {
+    max-width: none;
+    height: 100vh;
+  }
+}
+@media (max-width: 870px) {
+  .chart-card {
+    width: 45vw;
+  }
+}
+@media (max-width: 650px) {
+  .chart-card {
+    width: 90vw;
+  }
+}

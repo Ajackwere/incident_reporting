@@ -1,0 +1,49 @@
+.login-cnt {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+.login-cnt form {
+  margin-top: 20vh;
+  background-color: white;
+  width: 90vw;
+  max-width: 500px;
+  height: fit-content;
+  padding: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.login-cnt h1 {
+  margin: 0.5rem 0;
+}
+.login-cnt h2 {
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+.login-cnt input {
+  display: block;
+  margin: 1.5rem 0;
+  width: 100%;
+  border: none;
+  border-bottom: solid 1px black;
+  font-size: 1.2rem;
+  outline: none;
+}
+.login-cnt input:focus {
+  border-bottom: solid 2px purple;
+}
+.login-cnt button {
+  background-color: purple;
+  color: white;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+.singup-sec {
+  margin: 1.5rem 0;
+}
+.singup-sec span {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}

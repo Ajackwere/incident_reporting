@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import render
-
+from django.contrib.auth.hashers import make_password
 
 
 User = get_user_model()
@@ -17,6 +17,10 @@ class UserRegisterView(generics.CreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        password = serializer.validated_data.get('password')
+        serializer.save(password=make_password(password))
 
 def home(request):
     """
@@ -40,7 +44,7 @@ class IncidentReportView(generics.CreateAPIView):
     
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -50,7 +54,7 @@ class IncidentListView(generics.ListAPIView):
     """
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
 
 class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
@@ -58,7 +62,7 @@ class IncidentDetailView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Incident.objects.all()
     serializer_class = IncidentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = []
     
 class LoginView(APIView):
 
@@ -72,8 +76,13 @@ class LoginView(APIView):
         user = User.objects.filter(username=username).first()
         if user and user.check_password(password):
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key})
+            user_data = UserSerializer(user).data
+            return Response({
+                "token": token.key,
+                "user": user_data
+            })
         return Response({"error": "Invalid Credentials"}, status=400)
+    
 
 class DailyAnalysisView(generics.ListAPIView):
     """
@@ -81,7 +90,7 @@ class DailyAnalysisView(generics.ListAPIView):
     """
     queryset = DailyAnalysis.objects.all()
     serializer_class = DailyAnalysisSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = []
 
 class MonthlyAnalysisView(generics.ListAPIView):
 
@@ -91,4 +100,4 @@ class MonthlyAnalysisView(generics.ListAPIView):
     
     queryset = MonthlyAnalysis.objects.all()
     serializer_class = MonthlyAnalysisSerializer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = []

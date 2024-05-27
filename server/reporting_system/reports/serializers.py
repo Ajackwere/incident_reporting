@@ -4,7 +4,8 @@ from .models import User, Incident, DailyAnalysis, MonthlyAnalysis
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'phone_number']
+        fields = ['id', 'username', 'email', 'phone_number', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
 
 class IncidentSerializer(serializers.ModelSerializer):
     class Meta:

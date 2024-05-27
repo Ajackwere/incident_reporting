@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import render
-
+from django.contrib.auth.hashers import make_password
 
 
 User = get_user_model()
@@ -17,6 +17,10 @@ class UserRegisterView(generics.CreateAPIView):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def perform_create(self, serializer):
+        password = serializer.validated_data.get('password')
+        serializer.save(password=make_password(password))
 
 def home(request):
     """
@@ -72,8 +76,13 @@ class LoginView(APIView):
         user = User.objects.filter(username=username).first()
         if user and user.check_password(password):
             token, _ = Token.objects.get_or_create(user=user)
-            return Response({"token": token.key})
+            user_data = UserSerializer(user).data
+            return Response({
+                "token": token.key,
+                "user": user_data
+            })
         return Response({"error": "Invalid Credentials"}, status=400)
+    
 
 class DailyAnalysisView(generics.ListAPIView):
     """

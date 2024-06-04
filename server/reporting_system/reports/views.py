@@ -1,5 +1,5 @@
-from rest_framework import generics, permissions
-from django.contrib.auth import get_user_model
+from rest_framework import generics, permissions, status
+from django.contrib.auth import get_user_model, authenticate
 from .models import Incident, DailyAnalysis, MonthlyAnalysis
 from .serializers import UserSerializer, IncidentSerializer, DailyAnalysisSerializer, MonthlyAnalysisSerializer
 from rest_framework.authtoken.models import Token
@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password
+from django.views.decorators.csrf import csrf_exempt
 
 
 User = get_user_model()
@@ -70,6 +71,7 @@ class LoginView(APIView):
     User login endpoint.
     """
     
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         username = request.data.get("username")
         password = request.data.get("password")
